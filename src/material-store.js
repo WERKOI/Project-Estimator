@@ -4,8 +4,9 @@ const materialStore = writable([]); //создаём константу для �
 const key = 'materials';
 
 if (localStorage.getItem(key)) {
-    materialStore.set(JSON.parse(localStorage.getItem(key)));
-  }
+  materialStore.set(JSON.parse(localStorage.getItem(key)));
+}
+
 
 // функция для добавления названия ицены материала в качестве констант
 // возврат массивов товаров
