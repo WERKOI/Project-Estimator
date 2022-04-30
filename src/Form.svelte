@@ -5,28 +5,28 @@
    export let price;
    // условия смены надписи на кнопках
    $: mode = id ? "edit" : "add";
-   $: console.log(price);
    $: canSubmit = price >= 0 && name !== "";
+   $: console.log(price);
    // функция изменения состояния кнопки
    function submit() {
       if (!canSubmit) {
          return;
       }
-
+      // если значение mode === add добавляем название и цену в materialStore 
       if (mode === 'add'){
          materialStore.add(name, price);   
       }
 
-      price = "";
       name = "";
+      price = 5;
       id = undefined;
    }
    
    // функция изменения состояния кнопки
-   function cansel(){
-      price = "";
+   function cancel(){
+      price = 5;
       name = "";
-      id = undefined;     
+      id = undefined;    
    }
 </script>
 
@@ -68,7 +68,7 @@
    <!--конструкция if для активации кнопки отмены-->
    {#if mode === 'edit'}
       <button 
-      on:click={cansel} 
+      on:click={cancel} 
       class="float-right" 
       type="button">
       Cancel
