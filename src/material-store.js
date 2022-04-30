@@ -3,6 +3,7 @@ import { writable } from 'svelte/store'; //импорт svelte/store
 const materialStore = writable([]); //создаём константу для хранения массива
 const key = 'materials';
 
+//при получении ключа разбирает строку в JSON 
 if (localStorage.getItem(key)) {
   materialStore.set(JSON.parse(localStorage.getItem(key)));
 }
@@ -21,7 +22,7 @@ const add = (name, price) => {
       return [item, ...items];
     });
   };
-  //метод объединяет в формат JSON
+  //метод разбирает строку в JSON
   materialStore.subscribe((items) => {
     console.log(items);
     const jsonString = JSON.stringify(items);
