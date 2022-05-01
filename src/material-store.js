@@ -32,7 +32,14 @@ const add = (name, price) => {
 
             return items;
           });
-  }
+  };
+
+    const remove = (id) => {
+      materialStore.update((items) => {
+        return items.filter(i => i.id !== id);
+      });
+
+    }
 
   //метод разбирает строку в JSON
   materialStore.subscribe((items) => {
@@ -45,4 +52,5 @@ export default {
     subscribe: materialStore.subscribe,
     add,
     edit,
+    remove,
   };

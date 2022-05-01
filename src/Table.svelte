@@ -21,7 +21,11 @@
     const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD"        
-    })
+    });
+    function remove(id) {
+        materialStore.remove(id);
+
+    }
 </script>
 
 <!-- отвечает за стиль таблицы -->
@@ -31,6 +35,9 @@
     }
     tr {
         cursor: pointer;
+    }
+    tr:last-of-type {
+        cursor: inherit;
     }
 </style>
 <!-- создаём таблицу -->
@@ -53,7 +60,7 @@
             <td>{material.name}</td>
             <td>{formatter.format(material.price)}</td>
             <td>
-                <i class="far fa-trash-alt" />
+                <i on:click|stopPropagation={remove(material.id)} class="far fa-trash-alt" />
             </td>
         </tr>
         {/each}
