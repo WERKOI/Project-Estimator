@@ -6,7 +6,6 @@
    // условия смены надписи на кнопках
    $: mode = id ? "edit" : "add";
    $: canSubmit = price >= 0 && name !== "";
-   $: console.log(price);
    // функция изменения состояния кнопки
    function submit() {
       if (!canSubmit) {
