@@ -3,6 +3,7 @@
    export let id;   
    export let name="";
    export let price;
+   let inputPrice;
    // условия смены надписи на кнопках
    $: mode = id ? "edit" : "add";
    $: canSubmit = price >= 0 && name !== "";
@@ -22,6 +23,7 @@
 
       name = "";
       price = 5;
+      inputPrice.value = price;
       id = undefined;
    }
    
@@ -53,6 +55,7 @@
 
         <label for="priceField">Price</label><!--представляет заголовок для элемента-->
         <input
+        bind:this={inputPrice}
         bind:value={price}
         min="0"
         step="any" 
