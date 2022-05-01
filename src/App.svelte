@@ -1,6 +1,13 @@
 <script>//отвечает за создание функционала страницы
 	import Table from "./Table.svelte";// импорт файлов в App.svelte
 	import Form from "./Form.svelte";
+	let id;
+	let name = "";
+	let price = 5;
+
+	function edit(event){
+		({ id, name, price } = event.detail);
+	}
 </script>
 
 <style>/*отвечает за стиль страницы*/
@@ -17,7 +24,7 @@
 <main> <!--основное содержимое App.svelte-->
 	<h1>Project Estimator</h1>
 
-	<Form /> <!--Вызов Form.svelte-->
+	<Form bind:price bind:id bind:name /> <!--Вызов Form.svelte-->
 
-	<Table />
+	<Table on:edit={edit}/>
 </main>
