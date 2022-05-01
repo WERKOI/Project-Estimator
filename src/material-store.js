@@ -1,13 +1,14 @@
-import { writable } from 'svelte/store'; //импорт svelte/store 
+//импорт svelte/store 
+import { writable } from 'svelte/store'; 
 
-const materialStore = writable([]); //создаём константу для хранения массива
+//создаём константу для хранения массива
+const materialStore = writable([]); 
 const key = 'materials';
 
 //при получении ключа разбирает строку в JSON 
 if (localStorage.getItem(key)) {
   materialStore.set(JSON.parse(localStorage.getItem(key)));
 }
-
 
 // функция для добавления названия ицены материала в качестве констант
 // возврат массивов товаров

@@ -1,18 +1,27 @@
+<!-- отвечает за создание функционала страницы -->
 <script>
+   // импорт классов из дериктории
    import materialStore from "./material-store";
+
+   // экспортируем переменные
    export let id;   
    export let name="";
    export let price;
+
+   // создаём переменные
    let inputPrice;
+
    // условия смены надписи на кнопках
    $: mode = id ? "edit" : "add";
    $: canSubmit = price >= 0 && name !== "";
+
    // функция изменения состояния кнопки
    function submit() {
       if (!canSubmit) {
          return;
       }
-      // если значение mode === add добавляем название и цену в materialStore 
+      /* если значение mode === add добавляем название 
+      и цену в materialStore */
       if (mode === 'add'){
          materialStore.add(name, price);   
       }
@@ -20,7 +29,6 @@
       if (mode === "edit") {
          materialStore.edit(id, name, price);
       }
-
       name = "";
       price = 5;
       inputPrice.value = price;
@@ -35,7 +43,8 @@
    }
 </script>
 
-<style>/*отвечает за стиль кнопок*/
+<!-- отвечает за стиль кнопок -->
+<style>
    button {
       margin-left: 20px;
    }
@@ -44,16 +53,21 @@
    }
 </style>
 
-<form on:submit|preventDefault={submit}><!--создаём форму-->
-   <fieldset><!--используется для группировки нескольких элементов управления-->
-        <label for="nameField">Material</label><!--представляет заголовок для элемента-->
+<!--создаём форму-->
+<form on:submit|preventDefault={submit}>
+   <!--используется для группировки нескольких элементов управления-->
+   <fieldset>
+        <!--представляет заголовок для элемента-->
+        <label for="nameField">Material</label>
+        <!--приём данных-->
         <input 
         bind:value={name} 
         placeholder="Wood, Glue, Etc"
         type="text" 
-        id="nameField"><!--приём данных-->
+        id="nameField">
 
-        <label for="priceField">Price</label><!--представляет заголовок для элемента-->
+         <!--представляет заголовок для элемента-->
+        <label for="priceField">Price</label>
         <input
         bind:this={inputPrice}
         bind:value={price}
@@ -63,21 +77,23 @@
         type="number" 
         id="priceField">
    </fieldset> 
-   
+
+   <!--кнопка добавить-->
    <button 
    disabled={!canSubmit}
    class="float-right"
    type="submit">
    {mode}
-   </button><!--кнопка добавить-->
+   </button>
 
    <!--конструкция if для активации кнопки отмены-->
    {#if mode === 'edit'}
+      <!--кнопка отменить-->
       <button 
       on:click={cancel} 
       class="float-right" 
       type="button">
       Cancel
-      </button><!--кнопка отменить-->
+      </button>
    {/if}
 </form>

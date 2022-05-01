@@ -1,14 +1,17 @@
-<script>//отвечает за создание функционала страницы
+<!-- отвечает за создание функционала страницы -->
+<script>
     import { createEventDispatcher } from 'svelte';
     import materialStore from "./material-store";
 
     const dispatch = createEventDispatcher();
+    // создаем массив, который хранит материалы
     let materials = [];
 
     materialStore.subscribe(items => {
         materials = items;
     });
-
+    
+    // метод расчета итоговой суммы
     $: total = materials.reduce((prev, next) => {
         prev += next.price;
         return prev;
@@ -18,6 +21,7 @@
         dispatch("edit", { id, name, price });
     }
 
+    // значок доллара около суммы
     const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD"        
@@ -40,6 +44,7 @@
         cursor: inherit;
     }
 </style>
+
 <!-- создаём таблицу -->
 <table class="primary">
     <!-- оределяем набор строк -->
@@ -64,6 +69,7 @@
             </td>
         </tr>
         {/each}
+        <!-- сумма за товары -->
         <tr>
             <td>Total</td>
             <td colspan="2">{formatter.format(total)}</td>
